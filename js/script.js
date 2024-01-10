@@ -69,31 +69,56 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
     
     var drObject={
     id:drId,
-    title:drName}
-
-    calendar.addResource(drObject);
+    title:drName
+  }
+    clearField1();
+drId==""||drName==""?submitError():calendar.addResource(drObject);
+    
   });
 
   $("#pSubmit").click(a=>{
     var patName=$("#patName").val();
-    var patEmlId=$("#patEmlId").val();
+    // var patEmlId=$("#patEmlId").val();
     var sTime=$("#sTime").val();
     var eTime=$("#eTime").val();
     var mobile=$("#mobNo").val();
-    var selectDr=$("#drId").val();
+    var selectDr=$("#drIds").val();
 
-    console.log(patName,sTime,eTime,mobile,selectDr);
+    // console.log(patName,sTime,eTime,mobile,selectDr);
 
     
     var patObject={
       title: patName,
-            start: sTime, 
-            end: eTime, 
-            description:mobile,
-            resourceId:selectDr
+      start: sTime, 
+      end: eTime, 
+      description:mobile,
+      resourceId:selectDr
     }
     console.log(patObject);
+    clearField();
     calendar.addEvent(patObject);
+    
   });
+
+  function submitError(){
+  Swal.fire({
+    title: " dr Entery pending?",
+    text: "That thing is still around?",
+    icon: "question"
+  });}
+
+   function clearField()
+   {$("#patName").val("");
+   $("#patEmlId").val("");
+   $("#sTime").val("");
+   $("#eTime").val("");
+   $("#mobNo").val("");
+   $("#drId").val("");
+   }
+    function clearField1()
+    {
+      $("#drId").val("");
+      $("#drName").val("");
+    };
 
   
